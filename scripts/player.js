@@ -4,7 +4,6 @@ const player =
     size: new Vector(8, 8),
     rays: 
     [
-        new Ray(new Vector(0, 7), new Vector(0, 1), grid.resolution),
         new Ray(new Vector(1, 7), new Vector(0, 1), grid.resolution),
         new Ray(new Vector(2, 7), new Vector(0, 1), grid.resolution),
         new Ray(new Vector(3, 7), new Vector(0, 1), grid.resolution),
@@ -13,7 +12,7 @@ const player =
         new Ray(new Vector(6, 7), new Vector(0, 1), grid.resolution),
         new Ray(new Vector(7, 7), new Vector(0, 1), grid.resolution),
         new Ray(new Vector(8, 7), new Vector(0, 1), grid.resolution),
-        new Ray(new Vector(9, 7), new Vector(0, 1), grid.resolution),
+
     ],
 
     rayData: [],
@@ -44,19 +43,24 @@ const player =
 
         if(direction.x != 0 || direction.y != 0)
         {
-            this.position = this.position.Add(direction);
-
-            // Loop through and update each ray position.
-            for(let i = 0; i < this.rays.length; i++)
-            {
-                this.rays[i].origin = this.rays[i].origin.Add(direction);
-            }
-
-            DrawScreen();
+            this.Move(direction);
         }
         else
         {
             console.error(`Invalid input key '${data.key}'`);
         }
     },
+
+    Move(direction)
+    {
+        this.position = this.position.Add(direction);
+
+        // Loop through and update each ray position.
+        for(let i = 0; i < this.rays.length; i++)
+        {
+            this.rays[i].origin = this.rays[i].origin.Add(direction);
+        }
+
+        DrawScreen();
+    }
 }

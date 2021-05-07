@@ -44,18 +44,18 @@ class Ray
             this.DrawToCanvas(newPosition, '#ff6969', ctx);
         }   
         
-        return this.maxLength;
+        return -1;
     }
 
     Growcast(direction)
     {
-        let length = this.Cast();
+        this.Cast();
+        let length = this.Cast(this.origin, direction);
 
+        console.log(length);
         for(let i = 0; i < length; i++)
         {
-            let newPosition = this.origin.Add( new Vector(direction.x * i, direction.y * i));
-            console.log(newPosition.ToString());
-            this.Cast(newPosition);
+            this.Cast(this.origin.Add(new Vector(0, i)), direction);
         }
     }
 

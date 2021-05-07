@@ -29,11 +29,8 @@
 
                 // Draw functions here
                 grid.DrawGrid(ctx);
-                // player.Draw(ctx);
-                // renderer.Draw(player.rayData);
-
-                let ray = new Ray(new Vector(17, 18), new Vector(0, 1), 512);
-                ray.Growcast(new Vector(1, 1));
+                player.Draw(ctx);
+                renderer.Draw(player.rayData);
             };
 
             function ClearScreen()
@@ -46,6 +43,7 @@
             // Draw on initilization
             renderer.Initialize();
             DrawScreen();
+            player.Move(new Vector(30, 0));
         </script>
     </body>
 </html>
