@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Raycast</title>
+        <link rel="stylesheet" href="stylesheet.css"></link>
+    </head>
+    <body onkeypress="player.HandleInput(event)">
+        <div class="app">
+            <canvas id="canvas" width="256" height="256"></canvas>
+            <canvas id="scene" width="128" height="256"></canvas>
+        </div>
+
+        <script>
+            const canvas = document.getElementById('canvas');
+        </script>
+        <script src="scripts/vector.js"></script>
+        <script src="scripts/grid.js"></script>
+        <script src="scripts/raycast.js"></script>
+        <script src="scripts/player.js"></script>
+        <script src="scripts/renderer.js"></script>
+        <script> 
+
+            
+            function DrawScreen()
+            {
+                let ctx = canvas.getContext('2d');
+
+                // Clear screen.
+                ClearScreen();
+
+                // Draw functions here
+                grid.DrawGrid(ctx);
+                // player.Draw(ctx);
+                // renderer.Draw(player.rayData);
+
+                let growRay = new Ray(new Vector(24, 2), new Vector(0, 1), 512);
+                growRay.Raycast(new Vector(24, 2), new Vector(0, 1), 512);
+            };
+
+            function ClearScreen()
+            {
+                let ctx = canvas.getContext('2d');
+                ctx.fillStyle='#FFFFFF';
+                ctx.fillRect(0, 0, canvas.height, canvas.width);
+            }
+
+            // Draw on initilization
+            renderer.Initialize();
+            DrawScreen();
+        </script>
+    </body>
+</html>
