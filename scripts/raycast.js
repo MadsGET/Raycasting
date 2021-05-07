@@ -19,27 +19,20 @@ const raycast =
 
 class Ray
 {
-    constructor(origin, direction, maxLength, isGrowable = false, growDirection = new Vector(0, 0))
+    constructor(origin, direction, maxLength)
     {
         this.origin = origin;
         this.direction = direction;
         this.maxLength = maxLength;
-        this.isGrowable = isGrowable;
-        this.growDirection = growDirection;
     }
 
     Cast()
     {
-        return this.Raycast(this.origin, this.direction, this.maxLength);
-    }
-
-    Raycast(origin, direction, maxLength)
-    {
         let ctx = canvas.getContext('2d');
-        for(let i = 1; i < maxLength +1; i++)
+        for(let i = 1; i < this.maxLength +1; i++)
         {
             // Calculate the new position.
-            let newPosition = origin.Add(new Vector(direction.x * i, direction.y * i));
+            let newPosition = this.origin.Add(new Vector(this.direction.x * i, this.direction.y * i));
             
             // Check if this node is closed.
             let currentIndex = grid.FetchNodeIndex(newPosition);
@@ -49,10 +42,14 @@ class Ray
             else if(grid.nodes[currentIndex] == null) return -1;
             
             this.DrawToCanvas(newPosition, '#ff6969', ctx);
-            if(this.isGrowable) this.Raycast(newPosition, this.growDirection, 1);
         }   
-
+        
         return this.maxLength;
+    }
+
+    Growcast()
+    {
+        return null;
     }
 
     DrawToCanvas(position, color, ctx)
