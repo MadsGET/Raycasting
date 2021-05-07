@@ -26,13 +26,13 @@ class Ray
         this.maxLength = maxLength;
     }
 
-    Cast()
+    Cast(origin = this.origin, direction = this.direction, maxLength = this.maxLength)
     {
         let ctx = canvas.getContext('2d');
-        for(let i = 1; i < this.maxLength +1; i++)
+        for(let i = 1; i < maxLength +1; i++)
         {
             // Calculate the new position.
-            let newPosition = this.origin.Add(new Vector(this.direction.x * i, this.direction.y * i));
+            let newPosition = origin.Add(new Vector(direction.x * i, direction.y * i));
             
             // Check if this node is closed.
             let currentIndex = grid.FetchNodeIndex(newPosition);
@@ -47,9 +47,16 @@ class Ray
         return this.maxLength;
     }
 
-    Growcast()
+    Growcast(direction)
     {
-        return null;
+        let length = this.Cast();
+
+        for(let i = 0; i < length; i++)
+        {
+            let newPosition = this.origin.Add( new Vector(direction.x * i, direction.y * i));
+            console.log(newPosition.ToString());
+            this.Cast(newPosition);
+        }
     }
 
     DrawToCanvas(position, color, ctx)
