@@ -29,11 +29,11 @@
 
                 // Draw functions here
                 grid.DrawGrid(ctx);
-                // player.Draw(ctx);
-                // renderer.Draw(player.rayData);
+                player.Draw(ctx);
+                renderer.Draw(player.rayData);
 
-                let growRay = new Ray(new Vector(24, 2), new Vector(0, 1), 512);
-                growRay.Raycast(new Vector(24, 2), new Vector(0, 1), 512);
+                // let growRay = new Ray(new Vector(24, 2), new Vector(0, 1), 512, true, new Vector(1, 1));
+                // growRay.Raycast(new Vector(24, 2), new Vector(0, 1), 512);
             };
 
             function ClearScreen()
